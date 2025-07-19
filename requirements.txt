@@ -1,7 +1,7 @@
+protobuf==3.19.6
 streamlit
 tensorflow==2.10.0
 librosa
 matplotlib
 pydub
 gdown
-protobuf==3.19.6
