@@ -104,7 +104,7 @@ def train_cnn_model():
             Dense(10, activation='softmax')
         ])
         model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-        history = model.fit(train_gen, validation_data=val_gen, epochs=10)
+        history = model.fit(train_gen, validation_data=val_gen, epochs=20)
 
         model.save(os.path.join(MODEL_PATH, 'cnn_model.h5'))
 
@@ -141,7 +141,7 @@ def train_transfer_learning():
             Dense(10, activation='softmax')
         ])
         model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-        history = model.fit(train_gen, validation_data=val_gen, epochs=10)
+        history = model.fit(train_gen, validation_data=val_gen, epochs=20)
 
         model.save(os.path.join(MODEL_PATH, 'transfer_model.h5'))
 
