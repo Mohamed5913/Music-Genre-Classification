@@ -12,7 +12,7 @@ import gdown
 
 # === Load Model from Google Drive if not present ===
 def download_model():
-    model_url = "https://drive.google.com/uc?id=1MZam4JfHtEtWTbF2cTACwxzXxSl5A7Tn"  # public file ID for transfer_model.h5
+    model_url = "https://drive.google.com/uc?id=1MZam4JfHtEtWTbF2cTACwxzXxSl5A7Tn"
     model_dir = "models"
     os.makedirs(model_dir, exist_ok=True)
     model_path = os.path.join(model_dir, "transfer_model.h5")
@@ -21,7 +21,19 @@ def download_model():
             gdown.download(model_url, model_path, quiet=False)
     return load_model(model_path)
 
-model = download_model()
+@st.cache_resource(show_spinner=False)
+def get_model():
+    model_url = "https://drive.google.com/uc?id=1MZam4JfHtEtWTbF2cTACwxzXxSl5A7Tn"
+    model_dir = "models"
+    os.makedirs(model_dir, exist_ok=True)
+    model_path = os.path.join(model_dir, "transfer_model.h5")
+    if not os.path.exists(model_path):
+        with st.spinner("📦 Downloading model from Google Drive..."):
+            gdown.download(model_url, model_path, quiet=False)
+    return load_model(model_path)
+
+model = get_model()
+
 
 GENRES = ['blues', 'classical', 'country', 'disco', 'hiphop',
           'jazz', 'metal', 'pop', 'reggae', 'rock']
