@@ -8,10 +8,21 @@ from tensorflow.keras.models import load_model
 import os
 import tempfile
 from pydub import AudioSegment
+import gdown
 
-# === Load Model ===
-MODEL_PATH = 'models/transfer_model.h5'
-model = load_model(MODEL_PATH)
+# === Load Model from Google Drive if not present ===
+def download_model():
+    model_url = "https://drive.google.com/uc?id=1MZam4JfHtEtWTbF2cTACwxzXxSl5A7Tn"  # public file ID for transfer_model.h5
+    model_dir = "models"
+    os.makedirs(model_dir, exist_ok=True)
+    model_path = os.path.join(model_dir, "transfer_model.h5")
+    if not os.path.exists(model_path):
+        with st.spinner("📦 Downloading model from Google Drive..."):
+            gdown.download(model_url, model_path, quiet=False)
+    return load_model(model_path)
+
+model = download_model()
+
 GENRES = ['blues', 'classical', 'country', 'disco', 'hiphop',
           'jazz', 'metal', 'pop', 'reggae', 'rock']
 GENRE_DESCRIPTIONS = {
