@@ -1,7 +1,7 @@
-streamlit==1.35.0
-tensorflow==2.11.0
-librosa==0.10.1
-matplotlib==3.8.4
+streamlit==1.30.0
 numpy==1.23.5
+librosa==0.10.1
+matplotlib==3.7.3
+tensorflow==2.10.0
 pydub==0.25.1
-scipy==1.11.4
+gdown==4.7.1
